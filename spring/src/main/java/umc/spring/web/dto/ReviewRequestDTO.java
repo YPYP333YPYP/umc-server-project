@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class ReviewRequestDTO {
 
     @Getter
-    public static class JoinDto {
+    public static class JoinReviewDto {
 
         @NotBlank
         String body;

@@ -1,6 +1,7 @@
 package umc.spring.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,14 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+
 @RequestMapping("/review")
 public class ReviewRestController {
 
     private final ReviewCommandService reviewCommandService;
 
     @PostMapping("/")
-    public ApiResponse<ReviewResponseDTO.JoinResultDTO> join(@RequestBody @Valid ReviewRequestDTO.JoinDto request){
+    public ApiResponse<ReviewResponseDTO.JoinReviewResultDTO> join(@RequestBody @Valid ReviewRequestDTO.JoinReviewDto request){
         Review review = reviewCommandService.joinReview(request);
         return ApiResponse.onSuccess(ReviewConverter.tojoinResultDTO(review));
     }

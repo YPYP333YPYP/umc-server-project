@@ -8,15 +8,15 @@ import java.time.LocalDateTime;
 
 public class ReviewConverter {
 
-    public static ReviewResponseDTO.JoinResultDTO tojoinResultDTO(Review review) {
-        return ReviewResponseDTO.JoinResultDTO.builder()
+    public static ReviewResponseDTO.JoinReviewResultDTO tojoinResultDTO(Review review) {
+        return ReviewResponseDTO.JoinReviewResultDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
 
     }
 
-    public static Review toReview(ReviewRequestDTO.JoinDto request) {
+    public static Review toReview(ReviewRequestDTO.JoinReviewDto request) {
 
         return Review.builder()
                 .body(request.getBody())
