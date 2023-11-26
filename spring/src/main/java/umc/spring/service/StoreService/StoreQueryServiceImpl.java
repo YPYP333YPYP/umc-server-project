@@ -1,4 +1,17 @@
 package umc.spring.service.StoreService;
 
-public class StoreQueryServiceImpl {
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import umc.spring.repository.StoreRepository;
+
+@Component
+@RequiredArgsConstructor
+public class StoreQueryServiceImpl implements StoreQueryService{
+
+    private final StoreRepository storeRepository;
+
+    @Override
+    public boolean existStore(Long id) {
+        return storeRepository.existsById(id);
+    }
 }

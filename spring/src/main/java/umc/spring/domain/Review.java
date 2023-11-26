@@ -1,6 +1,7 @@
 package umc.spring.domain;
 
 import lombok.*;
+import umc.spring.domain.common.BaseEntity;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Review {
+public class Review extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +32,12 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", columnDefinition = "BIGINT")
     private Store store;
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }
