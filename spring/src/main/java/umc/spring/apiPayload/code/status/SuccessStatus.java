@@ -1,13 +1,41 @@
 package umc.spring.apiPayload.code.status;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+import umc.spring.apiPayload.code.BaseCode;
 
-public enum SuccessStatus {
-    _OK;
+import umc.spring.apiPayload.code.ReasonDTO;
 
-    public String getCode() {
-        return "2000";
+@Getter
+@AllArgsConstructor
+public enum SuccessStatus implements BaseCode {
+
+    _OK(HttpStatus.CREATED, "COMMON200", "성공 입니다.");
+
+    private final HttpStatus httpStatus;
+    private final String code;
+    private final String message;
+
+    @Override
+    public ReasonDTO getReason() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(true)
+                .build();
     }
 
-    public String getMessage() {
-        return "OK";
+    @Override
+    public ReasonDTO getReasonHttpStatus() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(true)
+                .httpStatus(httpStatus)
+                .build()
+                ;
     }
+
+
+
 }
