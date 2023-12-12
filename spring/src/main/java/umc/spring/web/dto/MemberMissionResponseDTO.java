@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.spring.domain.Mission;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MemberMissionResponseDTO {
     @Builder
@@ -16,5 +19,8 @@ public class MemberMissionResponseDTO {
         Long memberMissionId;
         LocalDateTime createdAt;
     }
+
+
+
 
 }
