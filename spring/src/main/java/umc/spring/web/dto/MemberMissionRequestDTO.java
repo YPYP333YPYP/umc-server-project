@@ -30,5 +30,6 @@ public class MemberMissionRequestDTO {
         @IsChallenging
         @NotBlank
         Long memberMissionId;
+
     }
 }

@@ -17,6 +17,7 @@ import umc.spring.service.MemberMissionService.MemberMissionCommandService;
 import umc.spring.service.MemberService.MemberCommandService;
 import umc.spring.service.MemberService.MemberQueryService;
 import umc.spring.validation.annotation.CheckPage;
+import umc.spring.web.dto.MemberMissionResponseDTO;
 import umc.spring.web.dto.MemberRequestDTO;
 import umc.spring.web.dto.MemberResponseDTO;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -73,5 +74,31 @@ public class MemberRestController {
         Page<Mission> missionPage = memberMissionCommandService.getChallengingMissionList(memberId,page);
         return ApiResponse.onSuccess(MemberConverter.missionPreViewListDTO(missionPage));
     }
+
+
+    @Operation(summary = "특정 유저의 진행중인 미션을 완료로 바꾸고 목록 조회 API",description = "특정 유저의 진행중인 미션을 완료로 바꾼 후 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    @GetMapping("/{memberId}/{missionId}/missions/complete")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "유저의 아이디, path variable 입니다!"),
+            @Parameter(name = "missionId", description = "미션의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
+    public ApiResponse< MemberMissionResponseDTO.MemberMissionPreViewListDTO> changeStatusAndGetCompleteMissionList(
+            @PathVariable(name = "memberId") Long memberId,
+            @PathVariable(name = "missionId") Long missionId,
+            @CheckPage @RequestParam(name = "page") Integer page){
+        memberMissionCommandService.completeMemberMission(memberId, missionId);
+        MemberMissionResponseDTO.MemberMissionPreViewListDTO previewListDTO = memberMissionCommandService.getMemberMissionPreview(memberId, page);
+
+        return ApiResponse.onSuccess(previewListDTO);
+    }
+
+
 
 }

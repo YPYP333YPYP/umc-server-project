@@ -41,6 +41,8 @@ public class MissionRestController {
         return ApiResponse.onSuccess(MemberMissionConverter.joinMemberMissionResultDTO(memberMission));
     }
 
+
+
     @PatchMapping("/challenge")
     public ApiResponse<MemberMissionResponseDTO.JoinMemberMissionResultDTO> updateStatus(
             @RequestBody @Valid MemberMissionRequestDTO.UpdateStatusMemberMissionDto request) {

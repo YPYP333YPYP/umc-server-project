@@ -5,6 +5,7 @@ import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.web.dto.MemberMissionRequestDTO;
+import umc.spring.web.dto.MemberMissionResponseDTO;
 import umc.spring.web.dto.MemberRequestDTO;
 
 public interface MemberMissionCommandService {
@@ -12,4 +13,8 @@ public interface MemberMissionCommandService {
 
     Long updateStatusToChallenging(Long memberMissionId);
     Page<Mission> getChallengingMissionList (Long memberId, Integer page);
+
+    void completeMemberMission(Long memberId, Long missionId);
+
+    MemberMissionResponseDTO.MemberMissionPreViewListDTO getMemberMissionPreview(Long memberId, Integer pageNum);
 }

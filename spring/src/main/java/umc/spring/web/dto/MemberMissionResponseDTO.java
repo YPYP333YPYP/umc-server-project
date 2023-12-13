@@ -20,6 +20,31 @@ public class MemberMissionResponseDTO {
         LocalDateTime createdAt;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberMissionPreViewListDTO{
+        List<MemberMissionResponseDTO.MemberMissionPreViewDTO> memberMissionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberMissionPreViewDTO{
+        String status;
+        Integer reward;
+        String mission_spec;
+        LocalDate deadline;
+        LocalDate createdAt;
+    }
+
 
 
 
